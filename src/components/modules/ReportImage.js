@@ -7,10 +7,16 @@ export default function ReportImage() {
 
   function changeHandler(e) {
     const file = e.target.files[0];
+    console.log(file);
+    // 5MB
+    if (file.size > 5 * 1024 * 1024) {
+      alert("حجم عکس بیشتر از 5 مگابایت می باشد");
+      return;
+    }
     let findImage = images.find((item) => item.name === file.name);
     if (findImage) {
       alert("شما این عکس را وارد کردید");
-      return ;
+      return;
     }
     console.log(file);
     if (!file) return;
