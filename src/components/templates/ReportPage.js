@@ -9,7 +9,7 @@ import { BsFillLightbulbFill } from "react-icons/bs";
 export default function ReportPage() {
   return (
     <>
-      <div className="mt-4 flex px-[6px]">
+      <div className="mt-4 flex px-[13px]">
         <div className="w-1/2">
           <ReportDesc />
         </div>
