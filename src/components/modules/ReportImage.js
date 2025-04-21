@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { ImCross } from "react-icons/im";
 
 export default function ReportImage() {
   const [images, setImages] = useState([]);
@@ -27,6 +28,11 @@ export default function ReportImage() {
     }
 
     setImages((prev) => [...prev, file]);
+  }
+
+  function removeHandler(name) {
+    let removedArray = images.filter((item) => item.name !== name);
+    setImages(removedArray)
   }
 
   return (
@@ -60,13 +66,17 @@ export default function ReportImage() {
 
       <div className="mt-4 flex gap-3" dir="ltr">
         {images.map((img, index) => (
-          <div key={index} className=" rounded shadow">
+          <div key={index} className=" rounded shadow relative">
             <img
               src={URL.createObjectURL(img)}
               alt={`photo-${index + 1}`}
               className="h-[50px] w-[80px] rounded"
             />
             {/* <p className="text-xs mt-1 text-center text-gray-600">{img.name}</p> */}
+            <ImCross
+              className="absolute top-[4px] left-[4px] text-[8px]"
+              onClick={() => removeHandler(img.name)}
+            />
           </div>
         ))}
       </div>
