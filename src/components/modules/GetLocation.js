@@ -1,7 +1,11 @@
 "use client";
+import { useContext } from "react";
 import { useMapEvents } from "react-leaflet";
+import { reportContext } from "../templates/HomePage";
 
 export default function GetLocation({ setLocation, setAddress }) {
+    const { report, sendReport } = useContext(reportContext);
+  
   useMapEvents({
     click: async (e) => {
       const { lat, lng } = e.latlng;
@@ -16,6 +20,7 @@ export default function GetLocation({ setLocation, setAddress }) {
         console.log(data)
         if (data && data.display_name) {
           setAddress(data.display_name);
+          sendReport({...report , ["adr"] : data.display_name})
         } else {
           setAddress("آدرس پیدا نشد");
         }
