@@ -17,7 +17,7 @@ export default function ReportPage() {
           <ReportImage />
         </div>
       </div>
-      <div className="mt-[15px]">
+      <div className="mt-[15px] px-[13px]">
         <h2>انتخاب دسته بندی</h2>
         <p className="font-thin">
           نوع مشکلی که میخوای گزارش بدی رو انتخاب کن . این کمک میکنه گزارش

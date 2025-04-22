@@ -6,6 +6,8 @@ import { useState } from "react";
 import { IoNuclearOutline } from "react-icons/io5";
 import ChangeView from "../modules/UpdateMap";
 import GetLocation from "../modules/GetLocation";
+import { ZoomControl } from "react-leaflet";
+
 
 export default function MapPage() {
   const [city, setCity] = useState("");
@@ -28,9 +30,12 @@ export default function MapPage() {
         center={[location.lat, location.lon]}
         zoom={10}
         scrollWheelZoom={true}
+        zoomControl={false}
         style={{ height: "100vh", width: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <ZoomControl position="bottomright" />
+
         <ChangeView center={location} />
         <GetLocation setLocation={setLocation} setAddress={setAddress} />
 
