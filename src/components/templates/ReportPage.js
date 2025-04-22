@@ -5,21 +5,12 @@ import { FaLeaf } from "react-icons/fa";
 import { GiEmptyWoodBucketHandle } from "react-icons/gi";
 import { BsFillCloudFogFill } from "react-icons/bs";
 import { BsFillLightbulbFill } from "react-icons/bs";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { reportContext } from "./HomePage";
 
 export default function ReportPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { report, sendReport } = useContext(reportContext);
-
-  const toggleCategory = (title) => {
-    if (selectedCategories.includes(title)) {
-      setSelectedCategories((prev) => prev.filter((item) => item !== title));
-    } else {
-      setSelectedCategories((prev) => [...prev, title]);
-    }
-    sendReport({ ...report, ["category"]: selectedCategories });
-  };
 
   async function send() {
     const formData = new FormData();
@@ -52,7 +43,7 @@ export default function ReportPage() {
       </div>
       <div className="mt-[15px] px-[13px]">
         <h2>انتخاب دسته بندی</h2>
-        <p className="font-thin text-center">
+        <p className="font-thin max-[540px]:text-center">
           نوع مشکلی که میخوای گزارش بدی رو انتخاب کن . این کمک میکنه گزارش
           سریعتر بررسی بشه
         </p>

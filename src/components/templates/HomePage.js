@@ -14,7 +14,7 @@ export default function HomePage() {
   });
   return (
     <reportContext.Provider value={{ report, sendReport }}>
-      <div className="flex  max-xl:block">
+      <div className="flex max-xl:block">
         <div className="w-1/2 h-full max-xl:w-full ">
           <MapPage />
         </div>
