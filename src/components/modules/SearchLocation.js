@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { CiSearch } from "react-icons/ci";
 
 export default function SearchLocation({ city, setCity, setLocation }) {
@@ -13,9 +14,8 @@ export default function SearchLocation({ city, setCity, setLocation }) {
       const firstResult = data[0];
       setLocation({ lat: firstResult.lat, lon: firstResult.lon });
       // onSelect && onSelect(firstResult); // ارسال به MapPage
-
     } else {
-      alert("مکانی پیدا نشد")
+      toast.error("مکانی پیدا نشد");
     }
   }
   return (

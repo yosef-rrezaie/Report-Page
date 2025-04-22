@@ -13,7 +13,6 @@ export default function SearchInput({
   function changeHandler(e) {
     sendReport({ ...report, [e.target.name]: e.target.value });
   }
-  console.log(report);
 
   return (
     <div className="mb-[15px]">

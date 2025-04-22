@@ -17,7 +17,6 @@ export default function GetLocation({ setLocation, setAddress }) {
           `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&lang=fa`
         );
         const data = await res.json();
-        console.log(data)
         if (data && data.display_name) {
           setAddress(data.display_name);
           sendReport({...report , ["adr"] : data.display_name})

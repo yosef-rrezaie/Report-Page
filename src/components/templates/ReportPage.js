@@ -1,13 +1,10 @@
 import CategoryInput from "../modules/CategoryInput";
 import ReportDesc from "../modules/ReportDesc";
 import ReportImage from "../modules/ReportImage";
-import { FaLeaf } from "react-icons/fa";
-import { GiEmptyWoodBucketHandle } from "react-icons/gi";
-import { BsFillCloudFogFill } from "react-icons/bs";
-import { BsFillLightbulbFill } from "react-icons/bs";
 import { useContext, useState } from "react";
 import { reportContext } from "./HomePage";
 import { category } from "@/utils/categoryData";
+import toast from "react-hot-toast";
 
 export default function ReportPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -40,7 +37,7 @@ export default function ReportPage() {
     });
 
     const data = await res.json();
-    console.log(data);
+    if(data.message) toast.success(data.message)
   }
 
   return (

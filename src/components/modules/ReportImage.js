@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { reportContext } from "../templates/HomePage";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ReportImage() {
   const { report, sendReport } = useContext(reportContext);
@@ -12,18 +13,18 @@ export default function ReportImage() {
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-      alert("حجم عکس بیشتر از 5 مگابایت می‌باشد");
+      toast.error("حجم عکس بیشتر از 5 مگابایت می‌باشد");
       return;
     }
 
     let exists = images.find((item) => item.name === file.name);
     if (exists) {
-      alert("شما این عکس را وارد کردید");
+      toast.error("شما این عکس را وارد کردید");
       return;
     }
 
     if (images.length >= 4) {
-      alert("حداکثر 4 عکس می‌تونی ارسال کنی.");
+      toast.error("حداکثر 4 عکس می‌تونی ارسال کنی.");
       return;
     }
 
@@ -100,6 +101,7 @@ export default function ReportImage() {
           </div>
         ))}
       </div>
+      <Toaster/>
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { useContext } from "react";
 
 export default function ReportDesc() {
   const {report} = useContext(reportContext)
-  console.log("report :" , report)
   return (
     <div className="">
       <SearchInput
