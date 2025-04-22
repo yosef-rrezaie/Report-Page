@@ -3,11 +3,9 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import SearchLocation from "../modules/SearchLocation";
 import { useState } from "react";
-import { IoNuclearOutline } from "react-icons/io5";
 import ChangeView from "../modules/UpdateMap";
 import GetLocation from "../modules/GetLocation";
 import { ZoomControl } from "react-leaflet";
-
 
 export default function MapPage() {
   const [city, setCity] = useState("");
@@ -18,7 +16,7 @@ export default function MapPage() {
   const [address, setAddress] = useState("");
   return (
     <div className="relative">
-      <div className="absolute top-[20px] left-[30%] z-[1000]  p-2 rounded">
+      <div className="absolute top-[20px] left-[50%] translate-x-[-50%] z-[1000] p-2 pl-0 rounded">
         <SearchLocation
           city={city}
           setCity={setCity}
@@ -31,7 +29,7 @@ export default function MapPage() {
         zoom={10}
         scrollWheelZoom={true}
         zoomControl={false}
-        style={{ height: "100vh", width: "100%" }}
+        className="w-full h-screen max-lg:h-[80vh] max-md:h-[60vh]"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="bottomright" />

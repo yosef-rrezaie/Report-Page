@@ -42,21 +42,21 @@ export default function ReportPage() {
 
   return (
     <>
-      <div className="mt-4 flex px-[13px]">
-        <div className="w-1/2">
+      <div className="mt-4 flex px-[13px]  max-[540px]:block">
+        <div className="w-1/2 max-sm:w-full max-[540px]:grid max-[540px]:w-full">
           <ReportDesc />
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 max-[540px]:w-full">
           <ReportImage />
         </div>
       </div>
       <div className="mt-[15px] px-[13px]">
         <h2>انتخاب دسته بندی</h2>
-        <p className="font-thin">
+        <p className="font-thin text-center">
           نوع مشکلی که میخوای گزارش بدی رو انتخاب کن . این کمک میکنه گزارش
           سریعتر بررسی بشه
         </p>
-        <div className="grid grid-cols-2 justify-between mt-[14px] gap-4">
+        <div className="grid grid-cols-2 justify-between mt-[14px] gap-4 max-[430px]:grid-cols-1 ">
           <CategoryInput
             icon={<FaLeaf />}
             title="فضای سبز و درخشان"

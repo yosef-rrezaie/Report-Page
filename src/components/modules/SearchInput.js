@@ -27,7 +27,8 @@ export default function SearchInput({
         <>
           <textarea
             placeholder={[placeholder]}
-            className="mt-[10px] outline-none border-[2px] border-[#725d31] border-solid rounded-2xl w-[90%] p-[8px] placeholder:p-[8px] placeholder:text-[12px]"
+            className="mt-[10px] outline-none border-[2px] border-[#725d31] border-solid rounded-2xl w-[90%] p-[8px] placeholder:p-[8px] placeholder:text-[12px]
+            max-[540px]:w-[100%]"
             value={value}
             name={name}
             onChange={changeHandler}
@@ -37,7 +38,8 @@ export default function SearchInput({
         <input
           type={type}
           placeholder={[placeholder]}
-          className="mt-[10px] outline-none border-[2px] border-[#725d31] border-solid rounded-2xl w-[90%] p-[8px] placeholder:p-[8px] placeholder:text-[12px]"
+          className="mt-[10px] outline-none border-[2px] border-[#725d31] border-solid rounded-2xl w-[90%] p-[8px] placeholder:p-[8px] placeholder:text-[12px]
+           max-[540px]:w-[100%]"
           value={value}
           name={name}
           onChange={changeHandler}

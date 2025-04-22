@@ -20,7 +20,7 @@ export default function CategoryInput({
         {icon}
       </div>
       <div className="mr-[14px]">
-        <p className="font-bold">{title}</p>
+        <p className="">{title}</p>
         <p className="text-sm font-thin">{desc}</p>
       </div>
     </div>

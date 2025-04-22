@@ -14,11 +14,11 @@ export default function HomePage() {
   });
   return (
     <reportContext.Provider value={{ report, sendReport }}>
-      <div className="flex">
-        <div className="w-1/2 h-full">
+      <div className="flex  max-xl:block">
+        <div className="w-1/2 h-full max-xl:w-full ">
           <MapPage />
         </div>
-        <div className="w-1/2 h-full overflow-auto">
+        <div className="w-1/2 h-full overflow-auto max-xl:w-full">
           <ReportPage />
         </div>
       </div>
