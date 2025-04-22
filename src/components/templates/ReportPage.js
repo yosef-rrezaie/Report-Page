@@ -5,10 +5,13 @@ import { FaLeaf } from "react-icons/fa";
 import { GiEmptyWoodBucketHandle } from "react-icons/gi";
 import { BsFillCloudFogFill } from "react-icons/bs";
 import { BsFillLightbulbFill } from "react-icons/bs";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { reportContext } from "./HomePage";
 
 export default function ReportPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
+    const { report, sendReport } = useContext(reportContext);
+  
 
   const toggleCategory = (title) => {
     if (selectedCategories.includes(title)) {
@@ -16,6 +19,8 @@ export default function ReportPage() {
     } else {
       setSelectedCategories((prev) => [...prev, title]);
     }
+    sendReport({...report , ["category"] : selectedCategories})
+
   };
   return (
     <>

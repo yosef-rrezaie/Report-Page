@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
+import { reportContext } from "../templates/HomePage";
 
 export default function ReportImage() {
+  const { report, sendReport } = useContext(reportContext);
+
   const [images, setImages] = useState([]);
 
   function changeHandler(e) {
@@ -28,11 +31,13 @@ export default function ReportImage() {
     }
 
     setImages((prev) => [...prev, file]);
+    sendReport({ ...report, ["photos"]: images });
   }
 
   function removeHandler(name) {
     let removedArray = images.filter((item) => item.name !== name);
-    setImages(removedArray)
+    setImages(removedArray);
+    sendReport({ ...report, ["photos"]: images });
   }
 
   return (
