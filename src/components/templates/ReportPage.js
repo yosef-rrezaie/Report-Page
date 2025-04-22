@@ -5,12 +5,24 @@ import { FaLeaf } from "react-icons/fa";
 import { GiEmptyWoodBucketHandle } from "react-icons/gi";
 import { BsFillCloudFogFill } from "react-icons/bs";
 import { BsFillLightbulbFill } from "react-icons/bs";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { reportContext } from "./HomePage";
+import { category } from "@/utils/categoryData";
 
 export default function ReportPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { report, sendReport } = useContext(reportContext);
+
+  const toggleCategory = (title) => {
+    if (selectedCategories.includes(title)) {
+      setSelectedCategories((prev) => prev.filter((item) => item !== title));
+    } else {
+      setSelectedCategories((prev) => [...prev, title]);
+    }
+    sendReport({...report , ["category"] : selectedCategories})
+
+    sendReport({ ...report, ["category"]: selectedCategories });
+  };
 
   async function send() {
     const formData = new FormData();
@@ -48,36 +60,16 @@ export default function ReportPage() {
           سریعتر بررسی بشه
         </p>
         <div className="grid grid-cols-2 justify-between mt-[14px] gap-4 max-[430px]:grid-cols-1 ">
-          <CategoryInput
-            icon={<FaLeaf />}
-            title="فضای سبز و درخشان"
-            desc="آسیب به درختان با وضعیت نامناسب پارک"
-            onClick={() => toggleCategory("فضای سبز و درخشان")}
-            isSelected={selectedCategories.includes("فضای سبز و درخشان")}
-          />
-          <CategoryInput
-            icon={<GiEmptyWoodBucketHandle />}
-            title="زباله و نظافت"
-            desc="رها شدن زباله با سطل های پر و آلوده"
-            onClick={() => toggleCategory("زباله و نظافت")}
-            isSelected={selectedCategories.includes("زباله و نظافت")}
-          />
-          <CategoryInput
-            icon={<BsFillCloudFogFill />}
-            title="دیوار نویسی و آلودگی بصری"
-            desc="نوشته ها یا تبلیغات نا زیباروی دیوارها"
-            onClick={() => toggleCategory("دیوار نویسی و آلودگی بصری")}
-            isSelected={selectedCategories.includes(
-              "دیوار نویسی و آلودگی بصری"
-            )}
-          />
-          <CategoryInput
-            icon={<BsFillLightbulbFill />}
-            title="روشنایی معابر"
-            desc="چراغ خاموش یا نور کافی در خیابان"
-            onClick={() => toggleCategory("روشنایی معابر")}
-            isSelected={selectedCategories.includes("روشنایی معابر")}
-          />
+          {category.map((item) => (
+            <CategoryInput
+              key={item.id}
+              icon={item.icon}
+              title={item.title}
+              desc={item.desc}
+              onClick={() => toggleCategory(item.title)}
+              isSelected={selectedCategories.includes(item.title)}
+            />
+          ))}
         </div>
         <div className="flex justify-center mt-[25px]">
           <button
