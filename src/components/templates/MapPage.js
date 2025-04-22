@@ -13,7 +13,8 @@ import SearchLocation from "../modules/SearchLocation";
 import ChangeView from "../modules/UpdateMap";
 import GetLocation from "../modules/GetLocation";
 
-export default function MapPage() {
+export default function MapPage({ desktop }) {
+  console.log("desktop :" , desktop)
   const [city, setCity] = useState("");
   const [location, setLocation] = useState({
     lat: 35.0503078,
@@ -47,7 +48,7 @@ export default function MapPage() {
   };
 
   return (
-    <div className="relative">
+    <div className={`relative max-[540px]:${desktop}`}>
       <div className="absolute top-[20px] left-[50%] translate-x-[-50%] z-[1000] p-2 pl-0 rounded">
         <SearchLocation
           city={city}

@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { reportContext } from "./HomePage";
 import { category } from "@/utils/categoryData";
 import toast from "react-hot-toast";
+import ChangeMapPosition from "../modules/ChangeMapPosition";
 
 export default function ReportPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -42,14 +43,18 @@ export default function ReportPage() {
 
   return (
     <>
-      <div className="mt-4 flex px-[13px]  max-[540px]:block">
-        <div className="w-1/2 max-sm:w-full max-[540px]:grid max-[540px]:w-full">
+      <div className="mt-4 flex px-[13px] max-[540px]:block ">
+        <div className="w-1/2 max-sm:w-full  max-[540px]:w-full max-[540px]:block">
           <ReportDesc />
         </div>
-        <div className="w-1/2 max-[540px]:w-full">
+        <div>
+          <ChangeMapPosition/>
+        </div>
+        <div className="w-1/2 max-[540px]:w-full max-[540px]:block">
           <ReportImage />
         </div>
       </div>
+      
       <div className="mt-[15px] px-[13px]">
         <h2>انتخاب دسته بندی</h2>
         <p className="font-thin max-[540px]:text-center">
