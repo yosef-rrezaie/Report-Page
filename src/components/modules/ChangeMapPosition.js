@@ -8,7 +8,6 @@ export default function ChangeMapPosition() {
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
-      console.log("عرض جدید:", window.innerWidth);
     };
 
     handleResize();
@@ -20,7 +19,7 @@ export default function ChangeMapPosition() {
 
   return (
     <div className="p-4">
-      {width < "540" && <MapPage desktop={"block"}/>}
+      {width < "540" && <MapPage mobile="block"/>}
     </div>
   );
 }

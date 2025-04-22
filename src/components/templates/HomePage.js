@@ -15,8 +15,8 @@ export default function HomePage() {
   return (
     <reportContext.Provider value={{ report, sendReport }}>
       <div className="flex max-xl:block">
-        <div className="w-1/2 h-full max-xl:w-full" >
-          <MapPage desktop="hidden" />
+        <div className="w-1/2 h-full max-xl:w-full max-[540px]:hidden" >
+          <MapPage/>
         </div>
         <div className="w-1/2 h-full overflow-auto max-xl:w-full">
           <ReportPage />
