@@ -27,6 +27,12 @@ export default function ReportImage() {
       toast.error("حداکثر 4 عکس می‌تونی ارسال کنی.");
       return;
     }
+    const accessFile = file.name.split(".")[1];
+
+    if (accessFile !== "jpg" && accessFile !== "png") {
+      toast.error("لطفا تصویر آپلود کنید");
+      return;
+    }
 
     const newImages = [...images, file];
     setImages(newImages);
@@ -101,7 +107,7 @@ export default function ReportImage() {
           </div>
         ))}
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 }
