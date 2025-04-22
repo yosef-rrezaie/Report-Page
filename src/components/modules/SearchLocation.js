@@ -21,7 +21,8 @@ export default function SearchLocation({ city, setCity, setLocation }) {
   return (
     <div className="relative">
       <input
-        className="w-[325px] p-[8px] h-full bg-white outline-none rounded-2xl shadow-2xl placeholder:text-[12px]"
+        className="w-[325px] p-[8px] h-full bg-white outline-none rounded-2xl shadow-2xl placeholder:text-[12px] max-[470px]:w-[280px] 
+        max-[370px]:w-[240px] max-[310px]:w-[200px] max-[310px]:placeholder:text-[10px]"
         placeholder="مکان خود را در اینجا جست و جو کنید ..."
         onChange={(e) => setCity(e.target.value)}
       />
