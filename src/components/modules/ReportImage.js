@@ -8,7 +8,7 @@ export default function ReportImage() {
 
   function changeHandler(e) {
     const file = e.target.files[0];
-    console.log(file);
+    console.log(images);
     // 5MB
     if (file.size > 5 * 1024 * 1024) {
       alert("حجم عکس بیشتر از 5 مگابایت می باشد");

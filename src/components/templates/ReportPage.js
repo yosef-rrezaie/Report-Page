@@ -5,8 +5,18 @@ import { FaLeaf } from "react-icons/fa";
 import { GiEmptyWoodBucketHandle } from "react-icons/gi";
 import { BsFillCloudFogFill } from "react-icons/bs";
 import { BsFillLightbulbFill } from "react-icons/bs";
+import { useState } from "react";
 
 export default function ReportPage() {
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const toggleCategory = (title) => {
+    if (selectedCategories.includes(title)) {
+      setSelectedCategories((prev) => prev.filter((item) => item !== title));
+    } else {
+      setSelectedCategories((prev) => [...prev, title]);
+    }
+  };
   return (
     <>
       <div className="mt-4 flex px-[13px]">
@@ -28,21 +38,31 @@ export default function ReportPage() {
             icon={<FaLeaf />}
             title="فضای سبز و درخشان"
             desc="آسیب به درختان با وضعیت نامناسب پارک"
+            onClick={() => toggleCategory("فضای سبز و درخشان")}
+            isSelected={selectedCategories.includes("فضای سبز و درخشان")}
           />
           <CategoryInput
             icon={<GiEmptyWoodBucketHandle />}
             title="زباله و نظافت"
             desc="رها شدن زباله با سطل های پر و آلوده"
+            onClick={() => toggleCategory("زباله و نظافت")}
+            isSelected={selectedCategories.includes("زباله و نظافت")}
           />
           <CategoryInput
             icon={<BsFillCloudFogFill />}
             title="دیوار نویسی و آلودگی بصری"
             desc="نوشته ها یا تبلیغات نا زیباروی دیوارها"
+            onClick={() => toggleCategory("دیوار نویسی و آلودگی بصری")}
+            isSelected={selectedCategories.includes(
+              "دیوار نویسی و آلودگی بصری"
+            )}
           />
           <CategoryInput
             icon={<BsFillLightbulbFill />}
             title="روشنایی معابر"
             desc="چراغ خاموش یا نور کافی در خیابان"
+            onClick={() => toggleCategory("روشنایی معابر")}
+            isSelected={selectedCategories.includes("روشنایی معابر")}
           />
         </div>
         <div className="flex justify-center mt-[25px]">
