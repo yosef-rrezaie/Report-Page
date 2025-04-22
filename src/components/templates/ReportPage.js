@@ -10,8 +10,7 @@ import { reportContext } from "./HomePage";
 
 export default function ReportPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
-    const { report, sendReport } = useContext(reportContext);
-  
+  const { report, sendReport } = useContext(reportContext);
 
   const toggleCategory = (title) => {
     if (selectedCategories.includes(title)) {
@@ -19,9 +18,28 @@ export default function ReportPage() {
     } else {
       setSelectedCategories((prev) => [...prev, title]);
     }
-    sendReport({...report , ["category"] : selectedCategories})
-
+    sendReport({ ...report, ["category"]: selectedCategories });
   };
+
+  async function send() {
+    const formData = new FormData();
+    for (let key in report) {
+      if (Array.isArray(report[key])) {
+        report[key].forEach((item) => formData.append(key, item));
+      } else {
+        formData.append(key, report[key]);
+      }
+    }
+
+    const res = await fetch("/api/send-report", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log(data);
+  }
+
   return (
     <>
       <div className="mt-4 flex px-[13px]">
@@ -71,7 +89,10 @@ export default function ReportPage() {
           />
         </div>
         <div className="flex justify-center mt-[25px]">
-          <button className=" bg-[#d77622] w-[180px] h-[45px] rounded-2xl ">
+          <button
+            className=" bg-[#d77622] w-[180px] h-[45px] rounded-2xl "
+            onClick={send}
+          >
             ثبت گزارش
           </button>
         </div>
