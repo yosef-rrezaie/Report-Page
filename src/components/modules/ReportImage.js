@@ -6,48 +6,64 @@ import { reportContext } from "../templates/HomePage";
 
 export default function ReportImage() {
   const { report, sendReport } = useContext(reportContext);
-
   const [images, setImages] = useState([]);
 
-  function changeHandler(e) {
-    const file = e.target.files[0];
-    console.log(images);
-    // 5MB
+  function handleFile(file) {
+    if (!file) return;
+
     if (file.size > 5 * 1024 * 1024) {
-      alert("حجم عکس بیشتر از 5 مگابایت می باشد");
+      alert("حجم عکس بیشتر از 5 مگابایت می‌باشد");
       return;
     }
-    let findImage = images.find((item) => item.name === file.name);
-    if (findImage) {
+
+    let exists = images.find((item) => item.name === file.name);
+    if (exists) {
       alert("شما این عکس را وارد کردید");
       return;
     }
-    console.log(file);
-    if (!file) return;
 
     if (images.length >= 4) {
-      alert("حداکثر4 عکس می‌تونی ارسال کنی.");
+      alert("حداکثر 4 عکس می‌تونی ارسال کنی.");
       return;
     }
 
-    setImages((prev) => [...prev, file]);
-    sendReport({ ...report, ["photos"]: images });
+    const newImages = [...images, file];
+    setImages(newImages);
+    sendReport({ ...report, photos: newImages });
+  }
+
+  function changeHandler(e) {
+    handleFile(e.target.files[0]);
   }
 
   function removeHandler(name) {
-    let removedArray = images.filter((item) => item.name !== name);
-    setImages(removedArray);
-    sendReport({ ...report, ["photos"]: images });
+    const updatedImages = images.filter((item) => item.name !== name);
+    setImages(updatedImages);
+    sendReport({ ...report, photos: updatedImages });
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
   }
 
   return (
     <div>
-      <h2 className="mb-[25px]">ارسال عکس ها</h2>
+      <h2 className="mb-[25px]">ارسال عکس‌ها</h2>
 
-      <div className="flex flex-col items-center gap-[15px] border-dashed border-[2px] p-[18px]">
+      <div
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        className="flex flex-col items-center gap-[15px] border-dashed border-[2px] p-[18px] rounded-md cursor-pointer"
+      >
         <IoCloudUploadOutline className="text-[2rem]" />
         <p className="text-center font-thin text-[14px]">
-          عکس های مربوط به گزارش را اینجا بکشید و رها کنید یا برای انتخاب از
+          عکس‌های مربوط به گزارش را اینجا بکشید و رها کنید یا برای انتخاب از
           دستگاه کلیک کنید
         </p>
         <p className="text-center text-[14px]">
@@ -69,17 +85,16 @@ export default function ReportImage() {
         />
       </div>
 
-      <div className="mt-4 flex gap-3" dir="ltr">
+      <div className="mt-4 flex gap-3 flex-wrap" dir="ltr">
         {images.map((img, index) => (
-          <div key={index} className=" rounded shadow relative">
+          <div key={index} className="rounded shadow relative">
             <img
               src={URL.createObjectURL(img)}
               alt={`photo-${index + 1}`}
-              className="h-[50px] w-[80px] rounded"
+              className="h-[50px] w-[80px] rounded object-cover"
             />
-            {/* <p className="text-xs mt-1 text-center text-gray-600">{img.name}</p> */}
             <ImCross
-              className="absolute top-[4px] left-[4px] text-[8px]"
+              className="absolute top-[4px] left-[4px] text-[10px] bg-white rounded-full p-[1px] cursor-pointer"
               onClick={() => removeHandler(img.name)}
             />
           </div>
