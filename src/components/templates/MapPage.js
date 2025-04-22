@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -7,11 +8,10 @@ import {
   ZoomControl,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { CiLocationOn } from "react-icons/ci";
 import SearchLocation from "../modules/SearchLocation";
-import { useState } from "react";
 import ChangeView from "../modules/UpdateMap";
 import GetLocation from "../modules/GetLocation";
-import { CiLocationOn } from "react-icons/ci";
 
 export default function MapPage() {
   const [city, setCity] = useState("");
@@ -20,6 +20,13 @@ export default function MapPage() {
     lon: 50.3637353,
   });
   const [address, setAddress] = useState("");
+
+  const customIcon = new L.Icon({
+    iconUrl: "/iconMap.png",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
 
   const getUserLocation = () => {
     if (navigator.geolocation) {
@@ -62,8 +69,19 @@ export default function MapPage() {
         <ChangeView center={location} />
         <GetLocation setLocation={setLocation} setAddress={setAddress} />
 
-        <Marker position={[location.lat, location.lon]}>
-          <Popup>موقعیت مکانی شما</Popup>
+        <Marker
+          position={[location.lat, location.lon]}
+          icon={customIcon}
+          draggable={true}
+          eventHandlers={{
+            dragend: (e) => {
+              const marker = e.target;
+              const position = marker.getLatLng();
+              setLocation({ lat: position.lat, lon: position.lng });
+            },
+          }}
+        >
+          {/* <Popup>مکان را بکشید و جابه‌جا کنید</Popup> */}
         </Marker>
       </MapContainer>
 
@@ -72,7 +90,7 @@ export default function MapPage() {
         onClick={getUserLocation}
         title="دریافت موقعیت مکانی"
       >
-        <CiLocationOn size={30} color="white" />
+        <CiLocationOn size={24} color="white" />
       </div>
     </div>
   );
